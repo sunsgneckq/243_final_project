@@ -80,15 +80,4 @@ ars <- function (f, N, x0 = c(-1.0 , 1.0), bounds = c(-Inf, Inf), ...) {
   dh_j <- c()  # evaluated h'(x) values
   x <- c()  # accepted sample vector
 
-  ## Evaluate h(x0)
-  h0 <- h(x0)
-  ## Finite difference approximation to h'(x)
-  dh0 <- (h(x0 + dx) - h0)/dx
-
-  ## Check for NaNs and infinities
-  isnum <- is.finite(h0)&is.finite(dh0)
-  x0 <- x0[isnum]
-  h0 <- h0[isnum]
-  dh0 <- dh0[isnum]
-
 }
