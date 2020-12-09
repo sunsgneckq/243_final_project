@@ -29,9 +29,9 @@ slope_intercept_z_j <- function(x, h, dh) {
 #' @param h h(x)
 #' @output intercept and slope of piecewise l_j(x)
 
-slope_intercept_z_j <- function(x, h) {
+slope_intercept_l_j <- function(x, h) {
 length_h <- length(h)
-return (list(m = m <- (h[2:length_h] - h[1:length_h-1])/(x[2:length_h] - x[1:length_h-1]),
+return (list(m =  (h[2:length_h] - h[1:length_h-1])/(x[2:length_h] - x[1:length_h-1]),
              b = (x[2:length_h]*h[1:length_h-1] -
                     x[1:length_h-1]*h[2:length_h])/(x[2:length_h] -
                                                       x[1:length_h-1])))
@@ -56,10 +56,10 @@ beta_u_x <- function(m, b, bounds) {
   assert_that(all(none_zero != 0.0))
 
   ## treat m=0 case
-  summation_non_zero <- sum((exp_b_selection[none_zero]/m[none_zero])*(exp(m[none_zero]*z[2:L][none_zero]) - exp(m[none_zero]*bounds[1:length_bounds-1][none_zero])))
-  summation_z <- sum(exp_b_selection[!none_zero]*(bounds[2:L][none_zero] - bounds[1:length_bounds-1][!none_zero]))
+  summation_non_zero <- sum((exp_b_selection[none_zero]/m[none_zero])*(exp(m[none_zero]*bounds[2:length_bounds][none_zero]) - exp(m[none_zero]*bounds[1:length_bounds-1][none_zero])))
+  summation_z <- sum(exp_b_selection[!none_zero]*(bounds[2:length_bounds][none_zero] - bounds[1:length_bounds-1][!none_zero]))
   ## Check integration larger than 0
-  assert_that(summation_z + summation_non_zero <= 0.0, msg = " s(x)=exp(u(x)) <= 0")
+  #assert_that(summation_z + summation_non_zero <= 0.0, msg = " s(x)=exp(u(x)) <= 0")
 
   ## Normalize beta
   beta_normalization <- exp_b_selection/(summation_non_zero + summation_z)
@@ -80,7 +80,7 @@ sampling_x <- function(N, beta, m, weights, bounds) {
   sampling <- sample(length(weights), N, replace = TRUE, prob = weights)
   random_N <- runif(N)  # uniform random samples
   ## Inverse CDF sampling of x
-  x_CDF <- ifelse(m[sampling] != 0, (1.0/m[sampling])*log((m[sampling]*w[sampling]/beta[sampling])*random_N + exp(m[sampling]*z[sampling])), z[sampling] + w[sampling]*random_N/beta[sampling])
+  x_CDF <- ifelse(m[sampling] != 0, (1/m[sampling])*log((m[sampling]*weights[sampling]/beta[sampling])*random_N + exp(m[sampling]*bounds[sampling])), bounds[sampling] + weights[sampling]*random_N/beta[sampling])
   return (list(x = x_CDF, J = sampling))
 }
 
