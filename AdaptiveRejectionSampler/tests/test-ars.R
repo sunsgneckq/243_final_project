@@ -8,5 +8,5 @@ test_that("Missing arguments are dealt with", {
 
 test_that("Input arguments are valid", {
   expect_error(ars(10,10), "f must be a function")
-  expect_error(ars(dnorm,dnorm), "f must be a function") #check is.numeric(N)
+  expect_error(ars(dnorm,dnorm), "N must be numeric") #check is.numeric(N)
 })
