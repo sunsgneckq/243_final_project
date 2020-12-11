@@ -1,0 +1,42 @@
+\documentclass{article}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{rotfloat}
+\onehalfspacing
+
+
+
+\title{\textbf{STAT 243 - Final Project\\ Adaptive Rejection Sampler}}
+\author{%
+Keqin Cao,
+Mark Campmier,
+Colleen Sun
+}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+Simulation studies are a key to understanding the underlying properties of a statistical model or method. Typically simulation studies use synthetic data generated from a set of random numbers using an existing understanding of the underlying model of the distribution and iterate over the model to approximate an expected value. In the most simple case, these simulation data sets can be directly compiled from a known underlying cumulative density function (CDF) of the sample data. However, often the CDF may not be directly invertible or may poorly characterize the sample data, especially near the tails. To address this shortcoming of the Inverse CDF method, the Rejection Sampling method can be applied (RS). RS uses a function of known characteristics (g(x)) to constrain the CDF to a constant of integration. Then, an envelope function defined as greater than g(x) for all x, can be used to draw random numbers, and chosen to be accepted or rejected them by evaluating with a probability selected from the uniform(0, 1) distribution. Unfortunately, RS can be computationally expensive since it requires optimization to locate the supremum of g(x), and may lead to many rejected values. To compensate for these drawbacks, Adaptive Random Sampling (ARS) was developed.
+
+In this study, the ARS algorithm as described in Gilks and Wild 1992 was developed in the R programming language. Throughout development, the authors observed scientific programming concepts including type assertions, concise documentation, and unit testing to maintain reproducibility and interpretability of the software. This paper will briefly summarize the relevant aspects of ARS, describe in detail the primary function used to deploy the algorithm as well as its dependencies, and finally explore tests of the statistical properties of the R ARS deployment.
+
+\section{Methodology}
+\section{Testing}
+\section{Conclusion}
+\section{Author Contributions}
+\section{Appendix}
+\subsection{Examples Groups from different distribution}
+\subsection{Annotated References}
+\end{document}
