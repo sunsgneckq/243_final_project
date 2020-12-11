@@ -84,3 +84,40 @@ sampling_x <- function(N, beta, m, weights, bounds) {
   return (list(x = x_CDF, J = sampling))
 }
 
+
+
+max_iter_check <- function(i,max_iter){
+  if (i > max_iter) {
+    stop('You have reached the maximum number of iteration to prevent overflow')
+  }
+}
+
+boundary_warning <- function(boolean_check) {
+  if (!boolean_check) {
+    warning('Check bounds! The Sampled x is outside bounds ')
+    boolean_check <- TRUE
+  }
+}
+log_concavity_check <- function(bound, L, x) {
+  if (L > 1) {
+    ## Check log-concavity of function
+    if(!all((x[1:L-1] - x[2:L]) >= bound)) {
+      stop('Input function f not log-concave.')
+    }
+  }
+}
+length_stopper<- function(x){
+  length_dh_k <- length(x)
+  if (length_dh_k == 1) {
+    break
+  }
+}
+
+finite_check<- function(x,y) {
+  is.finite(x) && is.finite(y)
+}
+
+boundary_check<- function(x, bound) {
+  ((x > bound[1]) & (x < bound[2]))
+}
+
