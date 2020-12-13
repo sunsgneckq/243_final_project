@@ -177,5 +177,9 @@ length_stopper<- function(x){
 }
 
 
-
+duplication_check <- function(x, y, L, eps, dx) {
+  dup <-
+    append(TRUE, ((abs(x[1:L - 1] - x[2:L]) > eps) &
+                    ((y[2:L] - y[1:L - 1]) > dx)))
+}
 
