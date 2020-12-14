@@ -22,7 +22,7 @@ ars <-
     assert_that(is_function(f), msg = "f must be a function")
     assert_that(is.numeric(N), msg = "N must be a numeric input")
     ## Check that the bound has the length of 2
-    assert_that(length(bounds) == 2)
+    assert_that(length(bounds) == 2, msg = "length of bounds must be 2")
     bound_length_2 <- function(x) {
       length(x) == 2
     }
