@@ -23,7 +23,7 @@ ars <-
     ## Check if the input f is a function
     assert_that(is_function(f), msg = "f must be a function")
     ## Check if the N sample size is integer
-    assert_that(is.integer(N), msg = "N must be a numeric integer input")
+    assert_that(is.numeric(N), msg = "N must be a numeric input")
     ## Check if the N sample size is larger than 0
     assert_that(N > 0, msg = "N must be larger than 0")
     ## Check if the x0 has all numeric input
@@ -45,8 +45,9 @@ ars <-
     assert_that(all((x0 > bounds[1]) &
                       (x0 < bounds[2])), msg = "x0 must be inside the bounds")
 
-
-
+    ## Round N to the next smallest integer
+    N <- ceiling(N)
+    
     ## Define log function
     h <- function(x) {
       return (log(f(x, ...)))
