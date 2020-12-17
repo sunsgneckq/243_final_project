@@ -23,15 +23,6 @@ ars <-
     assert_that(is.numeric(N), msg = "N must be a numeric input")
     ## Check that the bound has the length of 2
     assert_that(length(bounds) == 2, msg = "length of bounds must be 2")
-    bound_length_2 <- function(x) {
-      length(x) == 2
-    }
-    ## Failure if the length of the bound is not equal to 2
-    on_failure(bound_length_2) = function(call, env) {
-      return("The length of the bounds (lower + upper) must be 2")
-    }
-    ## Check that the lower bound is not equal to upper bound
-    assert_that(bounds[1] != bounds[2])
     ## Raise warning message and replace if they are the same
     if (bounds[1] == bounds[2]) {
       warning("Upper bound and lower bound cannot be the same, switch to default values")
@@ -56,17 +47,16 @@ ars <-
 
 
     ## Define variables
-    dx <- 1E-8
     x0 <- sort(x0)
     x_k <- c()
     h_k <- c()
     dh_k <- c()
     x <- c()
+
     h0 <- h(x0)
-
     assert_that(length(h0) != 0, msg = "log function of x0 cannot be NaN/infinite")
-
     ## Finite difference approximation to h'(x)
+    dx <- 1E-8
     dh0 <- (h(x0 + dx) - h0) / dx
 
     ## Exclude invalid x0
@@ -76,9 +66,8 @@ ars <-
     ## Exclude invalid dh0
     dh0 <- dh0[finite_check(h0, dh0)]
 
-    ##### Main Function
+    #### Main Function ####
     i <- 0
-    dx <- 1E-8
     max_iter <- 15000
     check_boundary <- FALSE
     ## Loop until we have N samples
@@ -86,12 +75,15 @@ ars <-
       i <- i + 1
       max_iter_check(i, max_iter)
       chunk_size_vectorized <- min(c(N, i ** 2))
-    ##### INITIALIZATION
-
+    #### INITIALIZATION ####
+    ## Length of x0 cannot be 0
       if (0 < length(x0)) {
         ## Update
+        ## Append x_k to x0 vector
         x_k <- append(x_k, x0)
+        ## Append h_k to h0 vector
         h_k <- append(h_k, h0)
+        ## Append dh_k to dh0 vector
         dh_k <- append(dh_k, dh0)
         x0 <- c()
         h0 <- c()
@@ -103,9 +95,6 @@ ars <-
         dh_k <- dh_k[sorted_string_index$ix]
 
         length_dh_k <- length(dh_k)
-
-
-        dx <-1E-8  # mesh size for finite difference approximation to h'(x)
         eps <- 1E-7
         if (length_dh_k > 1) {
           while (!all((abs(dh_k[1:length_dh_k - 1] - dh_k[2:length_dh_k]) > eps) &
@@ -140,7 +129,6 @@ ars <-
       sampling_x <-
         sampling_x(chunk_size_vectorized, s_k$beta, u_k$m, s_k$w, z_k)
       x_s <- sampling_x$x
-
       J <- sampling_x$J
 
       ## random uniform for rejection sampling

@@ -1,4 +1,4 @@
-#' @description Calculates the intercepts of \eqn{u_k(x)}, a piecewise linear 
+#' @description Calculates the intercepts of \eqn{u_k(x)}, a piecewise linear
 #' upper hull formed by the tangents to h(x).
 #' @param x numeric vector of x values to evaluate the tangents at
 #' @param h concave function h(x) evaluated at x
@@ -9,9 +9,9 @@
 intercept_z_j <- function(x, h, dh, bounds) {
   length_h <- length(h)
   return (append(bounds[1],
-                 append((h[2:length_h] - h[1:length_h - 1] - x[2:length_h] * 
-                           dh[2:length_h] + x[1:length_h - 1] * dh[1:length_h - 1]) / 
-                          (dh[1:length_h - 1] - dh[2:length_h]), 
+                 append((h[2:length_h] - h[1:length_h - 1] - x[2:length_h] *
+                           dh[2:length_h] + x[1:length_h - 1] * dh[1:length_h - 1]) /
+                          (dh[1:length_h - 1] - dh[2:length_h]),
                         bounds[2])))
 }
 
@@ -41,7 +41,7 @@ slope_intercept_l_j <- function(x, h) {
   length_h <- length(h)
   return (list(
     m =  (h[2:length_h] - h[1:length_h - 1]) / (x[2:length_h] - x[1:length_h - 1]),
-    b = (x[2:length_h] * h[1:length_h - 1] - x[1:length_h - 1] * h[2:length_h]) / 
+    b = (x[2:length_h] * h[1:length_h - 1] - x[1:length_h - 1] * h[2:length_h]) /
       (x[2:length_h] - x[1:length_h - 1])
   ))
 }
@@ -49,7 +49,7 @@ slope_intercept_l_j <- function(x, h) {
 
 #' @description Checks whether the integral of s(x) is positive
 #' @param x numeric
-#' @param y numeric 
+#' @param y numeric
 #' @return Throws an error if \code{x} + \code{y} is less than or equal to 0.
 
 integration_check <- function(x, y) {
@@ -200,14 +200,13 @@ length_stopper <- function(x) {
 #' @description Checks whether vectors contain duplicate values.
 #' @param x numeric vector
 #' @param y numeric vector
-#' @param L length 
+#' @param L length
 #' @param eps epsilon
 #' @param dx mesh size
-#' @return A boolean vector, \code{TRUE} if x and y do not contain duplicates, 
+#' @return A boolean vector, \code{TRUE} if x and y do not contain duplicates,
 #' \code{FALSE} otherwise.
 
 duplication_check <- function(x, y, L, eps, dx) {
   return (append(TRUE, ((abs(x[1:L - 1] - x[2:L]) > eps) &
                           ((y[2:L] - y[1:L - 1]) > dx))))
 }
-
