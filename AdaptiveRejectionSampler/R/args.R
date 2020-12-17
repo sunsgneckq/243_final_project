@@ -35,12 +35,10 @@ ars <-
       warning("Upper bound and lower bound cannot be the same, switch to default values")
       bounds <- c(-Inf, Inf)
     }
+    ## Check if bounds is numeric input
+    assert_that(is.numeric(bounds), msg = "bounds must be numeric values")
     ## Check if lower bound is smaller than upper bound
     assert_that(bounds[1] < bounds[2], msg = "Lower bound must be smaller than upper bound")
-    ## Check if lower bound is numeric input
-    assert_that(is.numeric(bounds[1]), msg = "lower bound must be numeric values")
-    ## Check if upper bound is numeric input
-    assert_that(is.numeric(bounds[2]), msg = "upper bound must be numeric values")
     ## Check if x0 is within bounds
     assert_that(all((x0 > bounds[1]) &
                       (x0 < bounds[2])), msg = "x0 must be inside the bounds")
