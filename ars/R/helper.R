@@ -1,3 +1,4 @@
+#' @title Z_j Intercept
 #' @description Calculates the intercepts of \eqn{u_k(x)}, a piecewise linear
 #' upper hull formed by the tangents to h(x).
 #' @param x numeric vector of x values to evaluate the tangents at
@@ -15,7 +16,7 @@ intercept_z_j <- function(x, h, dh, bounds) {
                         bounds[2])))
 }
 
-
+#' @title Z_j Slope and Intercept
 #' @description Calculates the slopes and intercepts of piecewise function
 #' \eqn{u_k} at given x values.
 #' @param x numeric vector of x values to evaluate at
@@ -28,7 +29,7 @@ slope_intercept_z_j <- function(x, h, dh) {
   return (list(m = dh, b = h - x * dh))
 }
 
-
+#' @title l_j Slope And Intercept
 #' @description Calculates the slopes and intercepts of piecewise function
 #' \eqn{l_j} at given x values. \eqn{l_j} is a piecewise linear lower hull
 #' formed by adjacent chords.
@@ -46,7 +47,7 @@ slope_intercept_l_j <- function(x, h) {
   ))
 }
 
-
+#' @title Integration Check
 #' @description Checks whether the integral of s(x) is positive
 #' @param x numeric
 #' @param y numeric
@@ -58,7 +59,7 @@ integration_check <- function(x, y) {
   }
 }
 
-
+#' @title Normalized Beta and Weights
 #' @description Calculates the normalized beta and weights for sampling \eqn{u_k}.
 #' @param m numeric vector of slope
 #' @param b numeric vector of intercept
@@ -99,7 +100,7 @@ beta_u_x <- function (m, b, bounds) {
   )))
 }
 
-
+#' @title Sampling Function
 #' @description Samples from \eqn{s_k(x)} function distribution, select segment
 #' of sampling based on the areas and use inverse CDF for sampling
 #' @param N Number of samples
@@ -124,7 +125,7 @@ sampling_x <- function(N, beta, m, weights, bounds) {
   return (list(x = x_CDF, J = sampling))
 }
 
-
+#' @title Maximum Iteration Check
 #' @description Checks whether the algorithm has reached a maximum number of
 #' iterations.
 #' @param i current iteration
@@ -138,7 +139,7 @@ max_iter_check <- function(i, max_iter) {
   }
 }
 
-
+#' @title Log-concave Check
 #' @description Checks whether the function f is log-concave.
 #' @param bound numeric
 #' @param L numeric
@@ -154,7 +155,7 @@ log_concavity_check <- function(bound, L, x) {
   }
 }
 
-
+#' @title Boundary Check
 #' @description Checks whether values are within given bounds.
 #' @param x numeric vector
 #' @param bounds numeric vector of length 2, lower bound and upper bound
@@ -164,7 +165,7 @@ boundary_check <- function(x, bound) {
   ((x > bound[1]) & (x < bound[2]))
 }
 
-
+# Boundary Flag
 #' @description Whether the boundary condition is being checked.
 #' @param boolean_check boolean
 #' @return Gives a warning message if the \code{boolean_check} is \code{FALSE}.
@@ -176,7 +177,7 @@ boundary_warning <- function(boolean_check) {
   }
 }
 
-
+#' @title Finite Check
 #' @description Checks for NaNs and infinities.
 #' @param x numeric vector
 #' @param y numeric vector
@@ -185,7 +186,7 @@ finite_check <- function(x, y) {
   is.finite(x) && is.finite(y)
 }
 
-
+#' @title Loop stopper
 #' @description Breaks out of the current loop if the length of \code{x} is 1.
 #' @param x numeric vector
 
@@ -196,7 +197,7 @@ length_stopper <- function(x) {
   }
 }
 
-
+#' @title Duplication Check
 #' @description Checks whether vectors contain duplicate values.
 #' @param x numeric vector
 #' @param y numeric vector

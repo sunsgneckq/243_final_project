@@ -12,7 +12,7 @@ library("assertthat")
 # Source the helper functions
 source("R/helper.R")
 
-
+#' @title Adaptive Rejection Sampling
 #' @description Generates samples from a log-concave distribution via adaptive
 #' rejection sampling.
 #' @param f vectorized function that's log-concave

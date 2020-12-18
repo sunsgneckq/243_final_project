@@ -1,4 +1,4 @@
 library(testthat)
-library(ars)
+library(dieroller)
 
-test_check("ars")
+test_check("dieroller")
