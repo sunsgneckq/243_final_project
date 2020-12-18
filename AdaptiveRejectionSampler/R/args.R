@@ -12,10 +12,21 @@ library("assertthat")
 # Source the helper functions
 source("helper.R")
 
+
+#' @description Generates samples from a log-concave distribution via adaptive 
+#' rejection sampling. 
+#' @param f vectorized function that's log-concave
+#' @param N positive numeric; number of samples to generate
+#' @param x0 numeric vector; bounds of the sampling domain
+#' @param bounds numeric vector of length 2; boundaries of the underlying sampling 
+#' distribution f(x)
+#' @param ... further arguments to be passed to \code{f}
+#' @return A vector of N samples generated from the f(x) distribution.
+
 ars <-
-  function (f,N,x0 = c(-1.0 , 1.0),bounds = c(-Inf, Inf),...) {
+  function (f, N, x0 = c(-1.0, 1.0), bounds = c(-Inf, Inf), ...) {
     ## Check if there is any missing input arguments
-    assert_that(!missing(f),!missing(N), msg = "Missing input arguments")
+    assert_that(!missing(f), !missing(N), msg = "Missing input arguments")
     ## Check if the input is a function
     is_function = function(x) {
       assert_that(is.function(x))
@@ -75,6 +86,7 @@ ars <-
     ## Exclude invalid dh0
     dh0 <- dh0[finite_check(h0, dh0)]
 
+    
     #### Main Function ####
     ## Set the starter i to be 0
     i <- 0
@@ -87,7 +99,9 @@ ars <-
       i <- i + 1
       max_iter_check(i, max_iter)
       chunk_size_vectorized <- min(c(N, i ** 2))
+      
     #### Init ####
+      
     ## Length of x0 cannot be 0
       if (0 < length(x0)) {
         ## Update
@@ -127,10 +141,6 @@ ars <-
           ## Log concavity check
           log_concavity_check(eps, length_dh_k, dh_k)
         }
-
-
-
-
         ## Use helper function to compute z_k, u_k(x), l_k(x), s_k(x)
         z_k <- intercept_z_j(x_k, h_k, dh_k, bounds)
         u_k <- slope_intercept_z_j(x_k, h_k, dh_k)
@@ -175,8 +185,7 @@ ars <-
       ## Append accepted values to x
       x <- append(x, x_s[boundary][first_rejection_accept])
       ## Append rejected values to x0
-      x0 <- append(x_s[!boundary],
-                   x_s[boundary][!first_rejection_accept])
+      x0 <- append(x_s[!boundary], x_s[boundary][!first_rejection_accept])
 
       if (length(x0) > 0) {
         ## Evaluate h(x0)
