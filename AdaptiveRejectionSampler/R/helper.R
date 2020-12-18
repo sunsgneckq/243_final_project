@@ -139,11 +139,11 @@ max_iter_check <- function(i, max_iter) {
 }
 
 
-#' @description Checks whether the function h is log-concave.
+#' @description Checks whether the function f is log-concave.
 #' @param bound numeric
 #' @param L numeric
 #' @param x numeric vector
-#' @return Gives an error message if the function h is not log-concave.
+#' @return Gives an error message if the function f is not log-concave.
 
 log_concavity_check <- function(bound, L, x) {
   if (L > 1) {
