@@ -24,9 +24,9 @@ test_that("Input checks work properly", {
 test_that("Inputting f(x) non-log-concave throws error", {
   expect_error(ars(dt, 100, df = 2), "Input function f not log-concave.")
   expect_error(ars(dcauchy, 100), "Input function f not log-concave.")
-  expect_error(ars(dlnorm, 100, 1, c(0,Inf)), "Input function f not log-concave.")
-  expect_error(ars(df, 100, df1 = 5, df2 = 2), "Input function f not log-concave.")
-  expect_error(ars(EnvStats::dpareto, 100, location = 1), "Input function f not log-concave.")
+  expect_error(ars(dlnorm, 100, 1, c(0, Inf)), "Input function f not log-concave.")
+  expect_error(ars(df, 100, 0.5, c(0, Inf), df1 = 5, df2 = 2), "Input function f not log-concave.")
+  expect_error(ars(EnvStats::dpareto, 100, 1.5, c(1, Inf), location = 1), "Input function f not log-concave.")
 })
 
 
