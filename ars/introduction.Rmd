@@ -16,8 +16,7 @@ library(ars)
 
 ## Description
 
-Generates samples from a log-concave distribution via adaptive rejection sampling as 
-Performs the Adaptive Random Sampler (ARS) algorithm in R as described in Gilks et al (1992).
+Generates samples from a log-concave distribution via adaptive rejection sampling as described in Gilks et al (1992).
 
 ## Usage
 
