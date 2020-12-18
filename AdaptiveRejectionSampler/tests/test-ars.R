@@ -39,6 +39,7 @@ test_that("Possible errors for inputting f(x) log-concave", {
 
 test_that("Result as expected for normal distribution", {
   N <- 500
+  set.seed(123)
   norm_output <- ars(dnorm, N, x0 = c(10,13), mean = 12, sd = 3)
   true_mean <- 12
   true_var <- 9
@@ -54,7 +55,7 @@ test_that("Result as expected for normal distribution", {
 
 test_that("Result as expected for exponential distribution", {
   N <- 500
-  #set.seed(123)
+  set.seed(123)
   exp_output <- ars(dexp, N, x0 = 0.5, bounds = c(0, Inf), rate = 0.5)
   true_mean = 1/0.5
   mean_CI_95 <- t.test(exp_output)$conf.int
@@ -66,6 +67,7 @@ test_that("Result as expected for exponential distribution", {
 
 test_that("Result as expected for uniform distribution", {
   N <- 500
+  set.seed(123)
   unif_output <- ars(dunif, N, x0 = 0.5, bounds = c(0,1))
   true_mean <- 1/2
   mean_CI_95 <- t.test(unif_output)$conf.int
@@ -77,6 +79,7 @@ test_that("Result as expected for uniform distribution", {
 
 test_that("Result as expected for gamma distribution", {
   N <- 500
+  set.seed(123)
   gamma_output <- ars(dgamma, N, x0 = 1, bounds = c(0, Inf), shape = 2, rate = 2)
   true_mean <- 1
   mean_CI_95 <- t.test(gamma_output)$conf.int
@@ -100,6 +103,7 @@ test_that("Result as expected for beta distribution", {
 
 test_that("Result as expected for laplace distribution", {
   N <- 500
+  set.seed(123)
   laplace_output <- ars(extraDistr::dlaplace, N, c(-10, 5, 0, 5, 10))
   true_mean <- 0
   mean_CI_95 <- t.test(laplace_output)$conf.int
@@ -107,3 +111,4 @@ test_that("Result as expected for laplace distribution", {
   expect_length(laplace_output, N)
   expect_true(mean_CI_95[1] <= true_mean & mean_CI_95[2] >= true_mean)
 })
+
