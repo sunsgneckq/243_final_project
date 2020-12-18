@@ -1,5 +1,5 @@
 ---
-title: "Getting started with Adaptive Rejection Sampling"
+title: "Introduction to Adaptive Rejection Sampling"
 author: "Keqin Cao"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
