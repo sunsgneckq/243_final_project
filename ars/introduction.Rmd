@@ -14,4 +14,51 @@ knitr::opts_chunk$set(collapse = T, comment = "#>")
 library(ars)
 ```
 
-##  
+## Description
+
+Generates samples from a log-concave distribution via adaptive rejection sampling as 
+Performs the Adaptive Random Sampler (ARS) algorithm in R as described in Gilks et al (1992).
+
+## Usage
+
+```
+ars(f, N, x0 = c(-1.0, 1.0), bounds = c(-Inf, Inf), ...)
+
+```
+
+## Arguments
+
+`f` vectorized function that's log-concave
+`N` positive numeric; number of samples to generate
+`x0` numeric vector; bounds of the sampling domain
+`bounds` numeric vector of length 2; boundaries of the underlying sampling distribution f(x)
+`...` additional arguments to be passed to f
+
+
+## Details
+
+If `x0` is not specified, it assumes the default value of `c(-1.0, 1.0)`. If `bounds` is not specified, it assumes the default value of `c(-Inf, Inf)`. 
+The argument `f` must be a vectorized, log-concave function.
+`x0` can be a numeric vector of any length, as long as the values are valid for the given `f`.
+The `bounds` must be defined for `f`. For example, setting `bounds = c(-Inf, Inf)` will cause an error for exponential distributions because they are not defined on (-Inf, 0).
+If the value of `f(x)` is too small for the range of x given by `bounds`, the program will throw an error.
+
+
+## References
+
+Gilks and Wild.Adaptive Rejection Sampling for Gibbs Sampling(1992)
+
+Paciorek.STAT243 Unit 9 - Simulation(2020)
+
+
+## Examples
+```
+ars(dnorm, 100)
+
+## sampling from Exp(0.5) distribution
+ars(dexp, 100, x0 = 0.5, bounds = c(0, Inf), rate = 0.5)
+
+```
+
+
+
