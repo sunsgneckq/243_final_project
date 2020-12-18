@@ -13,6 +13,7 @@ library("assertthat")
 #source("R/helper.R")
 #load_all("/Users/sunsgne/Desktop/243_final_project/ars/R")
 
+
 #' @title Adaptive Rejection Sampling
 #' @description Generates samples from a log-concave distribution via adaptive
 #' rejection sampling.
@@ -47,7 +48,7 @@ library("assertthat")
 #' ars(dnorm, 100)
 #' ## generating 100 samples from Exp(0.5) distribution
 #' ars(dexp, 100, x0 = 0.5, bounds = c(0, Inf), rate = 0.5)
-
+#' @export ars
 ars <-
   function (f, N, x0 = c(-1.0, 1.0), bounds = c(-Inf, Inf), ...) {
     ## Check if there is any missing input arguments
