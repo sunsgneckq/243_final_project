@@ -22,10 +22,10 @@ test_that("slope_intercept_l_j works as expected", {
   x <- runif(10,0,2)
   l <- length(x)
   hx <- dnorm(x, log=T)
-  m <- (h[2:l] - h[1:l-1]) / (x[2:l] - x[1:l-1])
-  b <- (x[2:l] * h[1:l-1] - x[1:l-1] * h[2:l]) / (x[2:l] - x[1:l-1])
-  expect_equal(slope_intercept_l_j(x,h)[['m']], m)
-  expect_equal(slope_intercept_l_j(x,h)[['b']], b)
+  m <- (hx[2:l] - hx[1:l-1]) / (x[2:l] - x[1:l-1])
+  b <- (x[2:l] * hx[1:l-1] - x[1:l-1] * hx[2:l]) / (x[2:l] - x[1:l-1])
+  expect_equal(slope_intercept_l_j(x,hx)[['m']], m)
+  expect_equal(slope_intercept_l_j(x,hx)[['b']], b)
 })
 
 
