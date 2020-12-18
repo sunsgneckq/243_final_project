@@ -1,6 +1,6 @@
 # =====================================================
 # Devtools workflow
-#library(devtools)
+library(devtools)
 # =====================================================
 devtools::document()          # generate documentation
 devtools::check_man()         # check documentation

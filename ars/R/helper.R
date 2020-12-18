@@ -165,7 +165,7 @@ boundary_check <- function(x, bound) {
   ((x > bound[1]) & (x < bound[2]))
 }
 
-# Boundary Flag
+#' @title Boundary Flag
 #' @description Whether the boundary condition is being checked.
 #' @param boolean_check boolean
 #' @return Gives a warning message if the \code{boolean_check} is \code{FALSE}.

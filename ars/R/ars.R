@@ -10,7 +10,8 @@
 # Load Required Packages
 library("assertthat")
 # Source the helper functions
-source("R/helper.R")
+#source("R/helper.R")
+#load_all("/Users/sunsgne/Desktop/243_final_project/ars/R")
 
 #' @title Adaptive Rejection Sampling
 #' @description Generates samples from a log-concave distribution via adaptive

@@ -1,0 +1,17 @@
+---
+title: "Getting started with Adaptive Rejection Sampling"
+author: "Keqin Cao"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Adaptive Rejection Sampling}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+library(ars)
+```
+
+##  
