@@ -29,14 +29,14 @@ ars <-
     ## Check if the x0 has all numeric input
     assert_that(is.numeric(x0), msg = "x0 must be numeric input")
     ## Check that the bound has the length of 2
-    assert_that(length(bounds) == 2, msg = "length of bounds must be 2")
+    assert_that(length(bounds) == 2, msg = "Length of bounds must be 2")
+    ## Check if bounds is numeric input
+    assert_that(is.numeric(bounds), msg = "bounds must be numeric values")
     ## Raise warning message and replace if they are the same
     if (bounds[1] == bounds[2]) {
       warning("Upper bound and lower bound cannot be the same, switch to default values")
       bounds <- c(-Inf, Inf)
     }
-    ## Check if bounds is numeric input
-    assert_that(is.numeric(bounds), msg = "bounds must be numeric values")
     ## Check if lower bound is smaller than upper bound
     assert_that(bounds[1] < bounds[2], msg = "Lower bound must be smaller than upper bound")
     ## Check if x0 is within bounds
