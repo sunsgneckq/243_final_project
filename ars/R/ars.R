@@ -21,8 +21,32 @@ library("assertthat")
 #' @param x0 numeric vector; bounds of the sampling domain
 #' @param bounds numeric vector of length 2; boundaries of the underlying sampling
 #' distribution f(x)
-#' @param ... further arguments to be passed to \code{f}
+#' @param ... additional arguments to be passed to \code{f}
 #' @return A vector of N samples generated from the f(x) distribution.
+#' @details 
+#' If \code{x0} is not specified, it assumes the default value of \code{c(-1.0, 1.0)}. 
+#' If \code{bounds} is not specified, it assumes the default value of \code{c(-Inf, Inf)}. 
+#' 
+#' The argument \code{f} must be a vectorized, log-concave function.
+#' 
+#' \code{x0} can be a numeric vector of any length, as long as the values are 
+#' valid for the given \code{f}.
+#' The \code{bounds} must be defined for \code{f}. For example, setting 
+#' \code{bounds = c(-Inf, Inf)} will cause an error for exponential distributions 
+#' because they are not defined on (-Inf, 0).
+#' 
+#' If the value of \code{f(x)} is too small for the range of x given by \code{bounds}, 
+#' the program will throw an error.
+#' 
+#' @references 
+#' Gilks and Wild.Adaptive Rejection Sampling for Gibbs Sampling(1992)
+#' 
+#' Paciorek.STAT243 Unit 9 - Simulation(2020)
+#' 
+#' @examples 
+#' ars(dnorm, 100)
+#' ## generating 100 samples from Exp(0.5) distribution
+#' ars(dexp, 100, x0 = 0.5, bounds = c(0, Inf), rate = 0.5)
 
 ars <-
   function (f, N, x0 = c(-1.0, 1.0), bounds = c(-Inf, Inf), ...) {
