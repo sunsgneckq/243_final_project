@@ -54,19 +54,6 @@ test_that("beta_u_x works as expected", {
 })
 
 
-test_that("sampling_x works as expected", {
-  N <- 20
-  w <- runif(5)
-  weights <- w/sum(w)
-  m <- runif(5)
-  beta <- runif(5)
-  bounds <- c(1:6)
-  
-  expect_length(sampling_x(N, beta, m, weights, bounds)[["J"]], N)
-  expect_length(sampling_x(N, beta, m, weights, bounds)[["x"]], N)
-})
-
-
 test_that("log_concavity_check works as expected", {
   x <- c(0:10)
   expect_error(log_concavity_check(bound = 2, L = 2, x), "Input function f not log-concave.")
