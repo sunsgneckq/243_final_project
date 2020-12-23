@@ -1,0 +1,57 @@
+Grade: 92
+
+## ease of accessing package, help, tests:
+
+Fine.
+
+## main help page:
+
+Distinction between 'x0' and 'bounds' is not clear. In what sense are 'x0' bounds? Otherwise good.
+
+## quality of user interface:
+
+Requiring x0 is somewhat limiting. Good use of "...". 
+
+## performance on my tests:
+
+Good, except fails on double exponential.
+
+## t density output:
+
+Detects non-log-concavity.
+
+## presence of tests:
+
+Tests pass.
+Some unit tests, but code in test tends to duplicate code in functions so not really an independent test of code correctness. 
+Various tests of inputs, integration tests of various densities. Would be better (much more general/robust) to use something like the K-S test than to compute confidence intervals for mean of distribution.
+
+## code efficiency:
+
+Really fast - 0.01 sec. for 5000 samples.
+Good use of vectorization in helper functions and vectorized sampling.
+Strictly speaking, you didn't follow the algorithm as given because you include all of the vector of accepted points instead of only the accepted points up to the point that is being added to the abscissae set. 
+
+## comments in code:
+
+Extensive commenting but comments often don't clarify what code is actually doing in 'human' terms. E.g., the comment "append x_k to x0 vector" just directly translates the code and doesn't tell us what it means to append x_k to x0. Comments should help a reader translate the code to the algorithm steps. 
+
+## code organization/clarity/elegance:
+
+Code is a bit complicated to follow, in part because of all the checks (boundary, duplication, finiteness). It's not clear all those checks are really needed.
+
+For example, it's not clear why you need to check if samples are in the bounds - that should be guaranteed by how you draw the samples from the upper envelope. Also it can be hard to see how your code matches the algorithm because of the use of 'boundary'.
+
+Various functions are probably too specific and don't do much. E.g., max_iter_check, boundary_warning, and integration_check probably don't require their own functions.
+
+## equality of workload:
+
+It's a bit difficult to tell from the description who did the actual coding. Did everyone contribute to that? Also as stated in terms of specific contributions, Mark's role seems rather limited.
+
+Also note that part of the purpose of Git is that you don't need to assign one person to commit to Git - the idea is to manage contributions by using branches and commits. 
+
+## writeup:
+
+This is supposed to be a summary. There is more detail than needed in terms of the details of the implementation, given I can look at the code. As a result it's hard to see the overview of what you do. The set of example results is good.
+
+What is 'normalized beta'? This is never defined.
